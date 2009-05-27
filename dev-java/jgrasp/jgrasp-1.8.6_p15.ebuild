@@ -13,19 +13,12 @@ SLOT="1.8.6"
 KEYWORDS="amd64"
 IUSE=""
 
-DEPEND="app-arch/unzip
-	>=virtual/jdk-1.5.0
-	>=virtual/jre-1.5.0"
+DEPEND="app-arch/unzip"
 RDEPEND=">=virtual/jdk-1.5.0
 	>=virtual/jre-1.5.0"
-src_unpack() {
-	if [ "${A}" != "" ]; then
-		unpack ${A}
-	fi
-}
 src_compile() {
 	cd "${S}/src"
-	./configure --mandir /usr/local/share/man --bindir /usr/local/bin/
+	./configure
 	./Make.sh
 }
 src_install() {
