@@ -14,13 +14,13 @@ LICENSE="ZLIB"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-RESTRICT="strip"
+#RESTRICT="strip"
 
-DEPEND="" # binary
 RDEPEND="sys-libs/glibc
 		media-libs/libsdl[opengl]
 		media-libs/sdl-mixer[mp3,vorbis]
 		media-libs/sdl-image[jpeg,png]"
+DEPEND="$RDEPEND"
 
 S=${WORKDIR}/${PN}
 
