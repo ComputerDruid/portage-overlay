@@ -10,26 +10,23 @@ SRC_URI="ftp://ftp.eng.auburn.edu/pub/grasp/jgrasp/jgrasp186_15.zip"
 
 LICENSE=""
 SLOT="1.8.6"
-KEYWORDS="amd64"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="app-arch/unzip"
 RDEPEND=">=virtual/jdk-1.5.0
 	>=virtual/jre-1.5.0"
 src_compile() {
-	cd "${S}/src"
+	cd "${PN}/src"
 	./configure
 	./Make.sh
 }
-src_install() {
-	cd ../
-	#rm -rf bin/osx104 bin/solaris bin/jgrasp95.exe bin/jgrasp.exe
-	#bin/winconfig.exe src/
-	dodir /usr/share
-	cp -R "${S}" "${D}" || die "Install failed!"
-	ln -s "${D}"/jgrasp/bin/linux/jgrasp /usr/bin/jgrasp
-}
-pkg_prerm() {
-	rm /usr/bin/jgrasp
-	rm -rf /usr/share/jgrasp
+src_install() {	
+	insinto /usr/share/
+	doins -r *
+	fperms a+x /usr/share/jgrasp/bin/linux/jgrasp
+	dosym /usr/share/jgrasp/bin/linux/jgrasp /usr/bin/jgrasp
+	newenvd 20jgrasp
+	echo "JGRASP_HOME=\"/usr/share/jgrasp\"" > 20jgrasp
+	doenvd 20jgrasp
 }
