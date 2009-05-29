@@ -26,7 +26,6 @@ src_install() {
 	doins -r *
 	fperms a+x /usr/share/jgrasp/bin/linux/jgrasp
 	dosym /usr/share/jgrasp/bin/linux/jgrasp /usr/bin/jgrasp
-	newenvd 20jgrasp
 	echo "JGRASP_HOME=\"/usr/share/jgrasp\"" > 20jgrasp
 	doenvd 20jgrasp
 }
