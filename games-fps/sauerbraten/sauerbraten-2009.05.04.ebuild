@@ -8,7 +8,7 @@ inherit eutils games
 
 DESCRIPTION="free multiplayer/singleplayer first person shooter (major redesign of the Cube FPS)"
 HOMEPAGE="http://sauerbraten.org/"
-SRC_URI="mirror://sourceforge/sauerbraten/sauerbraten_${PV//./_}_ctf_edition_linux.tar.bz2"
+SRC_URI="mirror://sourceforge/sauerbraten/sauerbraten_${PV//./_}_trooper_edition_linux.tar.bz2"
 
 LICENSE="ZLIB"
 SLOT="0"
@@ -26,7 +26,6 @@ S=${WORKDIR}/${PN}
 
 src_prepare() {
 	ecvs_clean
-	epatch "${FILESDIR}"/${PN}_unix.patch
 	rm -r bin_unix/*
 }
 
