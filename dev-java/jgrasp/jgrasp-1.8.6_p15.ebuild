@@ -25,6 +25,7 @@ src_install() {
 	insinto /usr/share/
 	doins -r *
 	fperms a+x /usr/share/jgrasp/bin/linux/jgrasp
+	fperms a+x /usr/share/jgrasp/jbin/linux_run
 	dosym /usr/share/jgrasp/bin/linux/jgrasp /usr/bin/jgrasp
 	echo "JGRASP_HOME=\"/usr/share/jgrasp\"" > 20jgrasp
 	doenvd 20jgrasp
