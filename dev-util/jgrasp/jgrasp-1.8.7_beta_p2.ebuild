@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+inherit eutils
 EAPI="1"
 
 DESCRIPTION="A lightweight development environment"
@@ -29,4 +30,5 @@ src_install() {
 	dosym /usr/share/jgrasp/bin/linux/jgrasp /usr/bin/jgrasp
 	echo "JGRASP_HOME=\"/usr/share/jgrasp\"" > 20jgrasp
 	doenvd 20jgrasp
+	make_desktop_entry jgrasp "JGrasp" /usr/share/jgrasp/data/gric48.xpm
 }
