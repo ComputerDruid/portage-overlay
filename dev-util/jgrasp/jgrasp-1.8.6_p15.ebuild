@@ -11,7 +11,7 @@ SRC_URI="ftp://ftp.eng.auburn.edu/pub/grasp/jgrasp/jgrasp186_15.zip"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="app-arch/unzip"
@@ -23,8 +23,22 @@ src_compile() {
 	./Make.sh
 }
 src_install() {	
-	insinto /usr/share/
-	doins -r *
+	cd jgrasp
+	dodir /usr/share/jgrasp/
+	insinto /usr/share/jgrasp/
+	doins jgrasp.jar
+	dodir /usr/share/jgrasp/extensions
+	doins -r extensions
+	dodir /usr/share/jgrasp/data
+	doins -r data/
+	dodir /usr/share/jgrasp/bin
+	dodir /usr/share/jgrasp/bin/linux
+	insinto /usr/share/jgrasp/bin
+	doins -r bin/linux
+	dodir /usr/share/jgrasp/jbin
+	insinto	/usr/share/jgrasp/jbin
+	doins jbin/{linux_run,InputStream*,IsApplet.class,JGRASP*}
+	dohtml help/*.htm
 	fperms a+x /usr/share/jgrasp/bin/linux/jgrasp
 	fperms a+x /usr/share/jgrasp/jbin/linux_run
 	dosym /usr/share/jgrasp/bin/linux/jgrasp /usr/bin/jgrasp
