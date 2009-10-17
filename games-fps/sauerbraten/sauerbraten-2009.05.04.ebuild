@@ -44,19 +44,19 @@ src_install() {
 
 	local x
 	for x in client server ; do
-		newgamesbin "${S}"/sauerbraten_unix ${PN}_${x}-bin || die
+		newgamesbin "${S}"/sauerbraten_unix ${PN}_${x} || die
 		sed -i \
 			-e "s:SAUER_BIN=\${SAUER_DATA}/bin_unix:SAUER_BIN=$(games_get_libdir)/${PN}:g" \
 			-e "s:bin_unix/::g" \
 			-e "s:client:${x}:g" \
 			-e "s:SAUER_DATA=.:SAUER_DATA=${GAMES_DATADIR}/${PN}:g" \
-			"${D}/${GAMES_BINDIR}"/${PN}_${x}-bin \
-			|| die "unable to sed ${D}/${GAMES_BINDIR}/${PN}_${x}-bin"
+			"${D}/${GAMES_BINDIR}"/${PN}_${x} \
+			|| die "unable to sed ${D}/${GAMES_BINDIR}/${PN}_${x}"
 	done
 
 	dohtml -r README.html docs
 
-	make_desktop_entry ${PN}_client-bin ${PN}
+	make_desktop_entry ${PN}_client ${PN}
 
 	prepgamesdirs
 }
