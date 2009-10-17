@@ -46,11 +46,10 @@ src_install() {
 	for x in client server ; do
 		newgamesbin "${S}"/sauerbraten_unix ${PN}_${x}-bin || die
 		sed -i \
-			-e "s:SAUER_DIR=.:SAUER_DIR=$(games_get_libdir)/${PN}:g" \
+			-e "s:SAUER_BIN=\${SAUER_DATA}/bin_unix:SAUER_BIN=$(games_get_libdir)/${PN}:g" \
 			-e "s:bin_unix/::g" \
 			-e "s:client:${x}:g" \
-			-e "s:MACHINE_NAME=\`uname -m\`:MACHINE_NAME=i686:g" \
-			-e "s:SAUER_DATADIR=.:SAUER_DATADIR=${GAMES_DATADIR}/${PN}:g" \
+			-e "s:SAUER_DATA=.:SAUER_DATA=${GAMES_DATADIR}/${PN}:g" \
 			"${D}/${GAMES_BINDIR}"/${PN}_${x}-bin \
 			|| die "unable to sed ${D}/${GAMES_BINDIR}/${PN}_${x}-bin"
 	done
