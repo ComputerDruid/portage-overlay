@@ -32,12 +32,13 @@ src_prepare() {
 src_compile() {
 	cd src
 	emake
-	emake install
 }
 
 src_install() {
 	exeinto "$(games_get_libdir)"/${PN}
-	doexe bin_unix/native_{client,server} || die
+	mv "${S}"/src/sauer_client "${S}"/src/native_client
+	mv "${S}"/src/sauer_server "${S}"/src/native_server
+	doexe "${S}"/src/native_{client,server} || die
 
 	insinto "${GAMES_DATADIR}"/${PN}
 	doins -r data packages || die
@@ -47,7 +48,6 @@ src_install() {
 		newgamesbin "${S}"/sauerbraten_unix ${PN}_${x} || die
 		sed -i \
 			-e "s:SAUER_BIN=\${SAUER_DATA}/bin_unix:SAUER_BIN=$(games_get_libdir)/${PN}:g" \
-			-e "s:bin_unix/::g" \
 			-e "s:client:${x}:g" \
 			-e "s:SAUER_DATA=.:SAUER_DATA=${GAMES_DATADIR}/${PN}:g" \
 			"${D}/${GAMES_BINDIR}"/${PN}_${x} \
